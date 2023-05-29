@@ -6,7 +6,7 @@
             <p class="mb-6">
                 <a href="/notes" class="text-blue-500 underline">go back...</a>
             </p>
-            <form method="post">
+            <form method="post" action="/notes">
                 <div class="space-y-12">
                     <div class="border-b border-gray-900/10 pb-12">
                         <div class="col-span-full">
