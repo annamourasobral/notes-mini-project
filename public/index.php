@@ -1,8 +1,11 @@
 <?php
 
-const BASE_PATH = __DIR__.'/../';
+use Core\Router;
 
-require BASE_PATH.'Core/functions.php';
+session_start();
+const BASE_PATH = __DIR__ . '/../';
+
+require BASE_PATH . 'Core/functions.php';
 
 spl_autoload_register(function ($class) {
     // Core\Database
@@ -13,7 +16,7 @@ spl_autoload_register(function ($class) {
 
 require base_path('bootstrap.php');
 
-$router = new \Core\Router();
+$router = new Router();
 require BASE_PATH . 'routes.php';
 
 $routes = require base_path('routes.php');
