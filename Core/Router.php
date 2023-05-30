@@ -2,13 +2,14 @@
 
 namespace Core;
 
-use Core\Middleware\Authenticated;
-use Core\Middleware\Guest;
-use Core\Middleware\Middleware;
-
 class Router
 {
     protected $routes = [];
+
+    public function get($uri, $controller)
+    {
+        return $this->add('GET', $uri, $controller);
+    }
 
     public function add($method, $uri, $controller)
     {
@@ -16,15 +17,9 @@ class Router
             'uri' => $uri,
             'controller' => $controller,
             'method' => $method,
-            'middleware' => null
         ];
 
         return $this;
-    }
-
-    public function get($uri, $controller)
-    {
-        return $this->add('GET', $uri, $controller);
     }
 
     public function post($uri, $controller)
@@ -47,13 +42,6 @@ class Router
         return $this->add('PUT', $uri, $controller);
     }
 
-    public function only($key)
-    {
-        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
-
-        return $this;
-    }
-
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
@@ -63,11 +51,6 @@ class Router
         }
 
         $this->abort();
-    }
-
-    public function previousUrl()
-    {
-        return $_SERVER['HTTP_REFERER'];
     }
 
     protected function abort($code = Response::NOT_FOUND)
